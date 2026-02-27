@@ -1,0 +1,31 @@
+%% ============================================================
+%% invoice-header.tex
+%% Pandoc include-in-header for Japanese invoice (請求書) PDF
+%% Clean business document style — no header/footer
+%% ============================================================
+
+%% --- Packages ------------------------------------------------
+\usepackage{xeCJK}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+%% --- No header / footer (clean invoice style) ----------------
+\pagestyle{empty}
+
+%% --- Suppress \maketitle (pandoc may call it) ----------------
+\renewcommand{\maketitle}{}
+
+%% --- Table styling -------------------------------------------
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{10pt}
+
+%% --- Right-aligned amount helper -----------------------------
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+%% --- Tight list spacing fix ----------------------------------
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{2pt}\setlength{\parskip}{0pt}%
+}

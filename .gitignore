@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Personal data (receipts, scans, etc.)
+years/*/sources/
+docs/references/
+
+# Generated invoices (contain personal banking info)
+years/*/output/invoices/
+
+# Session-specific plan
+.claude/plan.md
+
+# Environment / credentials
+.env
+.env.*
+*.key
+credentials.json

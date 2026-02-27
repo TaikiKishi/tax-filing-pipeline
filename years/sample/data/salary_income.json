@@ -1,0 +1,14 @@
+{
+  "_comment": "源泉徴収票データ（サンプル）。ふるさと納税上限額の事後確認で使用。",
+  "payer": "株式会社サンプル",
+  "payment_amount": 5000000,
+  "income_after_deduction": 3560000,
+  "total_deduction": 1200000,
+  "withholding_tax": 80000,
+  "social_insurance": 700000,
+  "life_insurance_deduction": 50000,
+  "earthquake_insurance_deduction": 0,
+  "housing_loan_credit": 0,
+  "spouse_deduction": 380000,
+  "dependent_deduction": 0
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "id": "領収書番号_連番",
+    "date": "2025-04-24",
+    "patient": "氏名",
+    "facility": "医療機関名",
+    "department": "診療科",
+    "insurance_type": "社保|国保|自費|国民年金|国民健康保険",
+    "copay_rate": 30,
+    "insurance_amount": 0,
+    "out_of_pocket": 0,
+    "out_of_pocket_detail": {},
+    "meal_cost": 0,
+    "total": 0,
+    "receipt_type": "hospital|pharmacy|dental|pension_bill|insurance_bill",
+    "category": "medical|pharmacy|dental|pension|health_insurance|other",
+    "notes": ""
+  }
+]

@@ -1,0 +1,121 @@
+# ============================================================
+# Gitleaks カスタム設定
+# ============================================================
+# デフォルトルール（200+種類のクレデンシャルパターン）を拡張し、
+# プロジェクト固有の除外設定とカスタムルールを追加する。
+#
+# デフォルトルールには以下が含まれる:
+#   - AWS Access Key / Secret Key
+#   - GitHub Token (ghp_, gho_, ghu_, ghs_, ghr_)
+#   - GitLab Token
+#   - Slack Token / Webhook
+#   - Google API Key / OAuth
+#   - Azure / Microsoft 関連
+#   - Stripe API Key
+#   - SendGrid API Key
+#   - Twilio Auth Token
+#   - Generic API Key / Password パターン
+#   ... その他多数
+# ============================================================
+
+[extend]
+useDefault = true
+
+# ============================================================
+# カスタムルール: デフォルトにないパターンを追加
+# ============================================================
+
+# 日本のクラウドサービス固有パターン
+[[rules]]
+id = "sakura-api-key"
+description = "さくらインターネット APIキー"
+regex = '''(?i)sakura[_-]?api[_-]?key\s*[=:]\s*['"]?([a-zA-Z0-9]{32,})['"]?'''
+keywords = ["sakura"]
+tags = ["sakura", "japan", "api"]
+
+[[rules]]
+id = "line-channel-secret"
+description = "LINE Channel Secret"
+regex = '''(?i)line[_-]?channel[_-]?secret\s*[=:]\s*['"]?([a-f0-9]{32})['"]?'''
+keywords = ["line_channel", "line-channel"]
+tags = ["line", "japan", "messaging"]
+
+[[rules]]
+id = "line-access-token"
+description = "LINE Channel Access Token"
+regex = '''(?i)line[_-]?(?:channel[_-]?)?access[_-]?token\s*[=:]\s*['"]?([a-zA-Z0-9+/=]{100,})['"]?'''
+keywords = ["line_access", "line-access", "line_channel_access"]
+tags = ["line", "japan", "messaging"]
+
+# 汎用的な日本語環境でよく使われるパターン
+[[rules]]
+id = "database-url-with-password"
+description = "データベース接続URLにパスワードが含まれている"
+regex = '''(?i)(?:mysql|postgres(?:ql)?|mongodb(?:\+srv)?|redis|mssql):\/\/[^:]+:([^@\s]{8,})@'''
+keywords = ["mysql://", "postgres://", "postgresql://", "mongodb://", "redis://", "mssql://"]
+tags = ["database", "connection-string"]
+
+[[rules]]
+id = "bearer-token-in-code"
+description = "Bearer トークンがコードにハードコードされている"
+regex = '''(?i)['"]Bearer\s+([a-zA-Z0-9\-._~+/]+=*)['"]'''
+keywords = ["bearer"]
+tags = ["auth", "token"]
+
+[[rules]]
+id = "basic-auth-in-code"
+description = "Basic認証情報がコードにハードコードされている"
+regex = '''(?i)['"]Basic\s+([A-Za-z0-9+/]{20,}={0,2})['"]'''
+keywords = ["basic"]
+tags = ["auth", "basic"]
+
+# ============================================================
+# グローバル除外設定（誤検知を減らす）
+# ============================================================
+
+[[allowlists]]
+description = "テスト・サンプルファイルの除外"
+paths = [
+    '''tests/fixtures/.*''',
+    '''\.env\.example$''',
+    '''\.example$''',
+    '''\.sample$''',
+    '''\.template$'''
+]
+
+[[allowlists]]
+description = "依存パッケージ・生成ファイルの除外"
+paths = [
+    '''vendor/.*''',
+    '''node_modules/.*''',
+    '''\.git/.*''',
+    '''.*\.lock$''',
+    '''go\.(mod|sum)$''',
+    '''package-lock\.json$'''
+]
+
+[[allowlists]]
+description = "よくある誤検知パターン"
+regexTarget = "match"
+stopwords = [
+    "example",
+    "sample",
+    "dummy",
+    "test",
+    "placeholder",
+    "your-api-key-here",
+    "your-password-here",
+    "xxx",
+    "changeme",
+    "REPLACE_ME"
+]
+
+[[allowlists]]
+description = "ドキュメント内のコード例（マスク済み）"
+regexTarget = "line"
+regexes = [
+    '''(?i)#\s*例[：:]''',
+    '''(?i)#\s*example''',
+    '''(?i)AKIA1234567890ABCDEF''',
+    '''(?i)sk-1234567890abcdef'''
+]

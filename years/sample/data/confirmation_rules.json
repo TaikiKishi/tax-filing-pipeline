@@ -1,0 +1,48 @@
+{
+  "updates": [
+    {
+      "receipt_id": "EXAMPLE_001",
+      "action": "set_deductible",
+      "deductible_amount": 5000,
+      "judgment_reason": "不妊治療費用は医療費控除対象（国税庁No.1122）",
+      "include_in_xlsx": true,
+      "oop_items": [
+        {
+          "item": "不妊治療（自費診療）",
+          "amount": 5000,
+          "judgment": "deductible",
+          "reason": "不妊治療費用は医療費控除対象（国税庁No.1122）"
+        }
+      ]
+    },
+    {
+      "receipt_id": "EXAMPLE_002",
+      "action": "set_not_deductible",
+      "judgment_reason": "選定療養費は医療費控除対象外"
+    },
+    {
+      "receipt_id": "EXAMPLE_003",
+      "action": "update_oop",
+      "update_oop_items": [
+        {
+          "match_item": "診察券",
+          "set": {
+            "judgment": "not_deductible",
+            "reason": "診察券発行費用は医療費控除対象外"
+          }
+        }
+      ]
+    }
+  ],
+  "new_entries": [],
+  "compensations": [
+    {
+      "receipt_id": "EXAMPLE_001",
+      "source": "民間保険 手術給付金",
+      "amount": 25000,
+      "target_date": "2025-07-22",
+      "notes": "手術に対する民間保険給付金"
+    }
+  ],
+  "resolved_ids": ["EXAMPLE_001", "EXAMPLE_002", "EXAMPLE_003"]
+}

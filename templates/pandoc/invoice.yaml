@@ -1,0 +1,35 @@
+# ============================================================
+# invoice.yaml
+# Pandoc defaults for Japanese invoice (請求書) PDF output
+# Deploy: ~/.pandoc/defaults/invoice.yaml
+# Usage:  md2pdf invoice.md --profile invoice
+# NOTE:   ~ paths are expanded to $HOME by deploy.sh
+# ============================================================
+
+from: markdown+raw_tex
+to: pdf
+pdf-engine: xelatex
+
+metadata:
+  documentclass: article
+  classoption:
+    - a4paper
+    - 11pt
+  geometry:
+    - top=20mm
+    - bottom=20mm
+    - left=25mm
+    - right=25mm
+  mainfont: "IPAMincho"
+  sansfont: "IPAGothic"
+  monofont: "IPAGothic"
+  CJKmainfont: "IPAMincho"
+  CJKsansfont: "IPAGothic"
+  lang: ja
+
+table-of-contents: false
+number-sections: false
+standalone: true
+
+include-in-header:
+  - '~/.pandoc/templates/invoice/invoice-header.tex'

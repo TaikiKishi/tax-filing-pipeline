@@ -1,0 +1,44 @@
+{
+  "issuer": {
+    "name": "山田太郎",
+    "postal_code": "100-0001",
+    "address": "東京都千代田区千代田1-1-1",
+    "email": "taro@example.com",
+    "bank": {
+      "bank_name": "サンプル銀行",
+      "branch_name": "本店",
+      "account_type": "普通",
+      "account_number": "1234567",
+      "account_holder": "ヤマダ タロウ"
+    }
+  },
+  "income": [
+    {
+      "payer": "株式会社サンプル",
+      "payer_address": "東京都渋谷区渋谷2-2-2",
+      "amount": 50000,
+      "income_type": "原稿料",
+      "withholding": 5105,
+      "date": "2025-06-15",
+      "payment_date": "2025-07-31",
+      "payment_confirmed": true,
+      "received_amount": 44895,
+      "reference_id": "20250615001",
+      "invoice_file": null,
+      "notes": "技術記事執筆"
+    }
+  ],
+  "expenses": [
+    {
+      "item": "ChatGPT Plus（月額サブスク）",
+      "amount_usd": 240.00,
+      "exchange_rate": 150.0,
+      "amount_jpy": 36000,
+      "allocation_rate": 0.10,
+      "deductible": 3600,
+      "notes": "年額$240×150円×按分10%"
+    }
+  ],
+  "exchange_rate_source": "TTSレート（参考値）",
+  "exchange_rate_date": "2025-12-31"
+}

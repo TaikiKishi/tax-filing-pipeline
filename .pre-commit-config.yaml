@@ -1,0 +1,14 @@
+# pre-commit フック設定
+# インストール: pip install pre-commit && pre-commit install
+#
+# Gitleaks: コミット前にクレデンシャルを検知してブロックする
+# - 完全ローカル実行（データが外部に送信されることはない）
+# - 正規表現ベースの検知（AI/MLは使わない）
+
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+        name: gitleaks - クレデンシャル検知
+        args: ["--config", ".gitleaks.toml"]
